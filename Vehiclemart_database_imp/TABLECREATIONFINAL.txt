@@ -1,0 +1,511 @@
+-- Create Branch Table
+CREATE TABLE BRANCH ( 
+	BranchID integer PRIMARY KEY, 
+	Address varchar2(100) default NULL, 
+	City varchar2(25) NOT NULL, 
+	Phone number default NULL 
+);
+
+-- INSERT VALUE TO BRANCH TABLE
+INSERT INTO BRANCH VALUES(1001, '28_Stirling_RD_E139NH', 'London', 02045369526);
+INSERT INTO BRANCH VALUES(1002, 'Oldford_RD_B122TT', 'Birmingham', 01214143355);
+INSERT INTO BRANCH VALUES(1003, 'commont_RD_M176LT', 'Manchester', 02549635872);
+
+-- Display the branch table
+SELECT * FROM BRANCH;
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE VEHICLE  (
+    VehicleID integer PRIMARY KEY,
+    VehicleName varchar2(25) NOT NULL,
+    VehicleType varchar2(15) NOT NULL,
+    Model varchar2(25) NOT NULL,
+    year number(4,0) NOT NULL,
+    PurchaseDate DATE default NULL,
+    RentalPrice number CHECK(RentalPrice BETWEEN 10 AND 100000),
+    SalePrice number CHECK(SalePrice BETWEEN 10 AND 100000),
+    BranchID integer NULL,
+    CONSTRAINT BranchID_FKV FOREIGN KEY(BranchID)REFERENCES BRANCH(BranchID)
+);
+
+--Insertion in vehicle table
+INSERT INTO VEHICLE VALUES(2401,'BMW', 'COUPE','M8', 2018,'18-JAN-2018',3800,70000,1001);
+INSERT INTO VEHICLE VALUES(2402,'BMW', 'HATCHBACK','X-zeries', 2010,'22-mar-2012',3000,65400,1002);
+INSERT INTO VEHICLE VALUES(2403,'BENZ', 'COUPE', 'C_CLASS', 2016,'31-JAN-2018',4200,75000,1003);
+INSERT INTO VEHICLE VALUES(2404,'FORD', 'CROSSOVER', 'FIESTA', 2014,'16-Dec-2019',1000,22000,1001);
+INSERT INTO VEHICLE VALUES(2405,'VOLKSVAGEN', 'VAN', 'ENDEAVOUR', 2018,'28-FEB-2019',3800,65000,1002);
+INSERT INTO VEHICLE VALUES(2406,'BENZ','HATCHBACK','MERCEDUEZ', 2014,'18-APRIL-2016',1000,13000,1003);
+INSERT INTO VEHICLE VALUES(2407,'FORD','SUV', 'ENDEAVOUR', 2021,'12-JUNE-2017',500,14500,1001);
+INSERT INTO VEHICLE VALUES(2408,'TESLA','COUPE', 'ROADSTER', 2013,'14-FEB-2016',1200,60000,1002);
+INSERT INTO VEHICLE VALUES(2409,'FORD', 'SUV', 'ENDEAVOUR', 2021,'28-MAY-2017',3500,74500,1003);
+INSERT INTO VEHICLE VALUES(2410,'HYUNDAI', 'SEDAN', 'VERNA', 2019,'28-Feb-2014',4000,94000,1002);
+INSERT INTO VEHICLE VALUES(2411,'HYUNDAI', 'SEDAN', 'VERNA', 2017,'28-Feb-2014',3800,94500,1003);
+INSERT INTO VEHICLE VALUES(2412,'HYUNDAI', 'SEDAN', 'VERNA', 2013,'28-Feb-2014',4000,95000,1001);
+INSERT INTO VEHICLE VALUES(2413,'BMW', 'SEDAN','8_Series', 2018,'18-JAN-2018',3600,69000,1002);
+INSERT INTO VEHICLE VALUES(2414,'BMW', 'SEDAN','Z_SERIES', 2018,'18-JAN-2018',2000,69030,1003);
+INSERT INTO VEHICLE VALUES(2415,'ROLLS_ROYCE', 'COUPE','8_Series', 2018,'18-MAR-2019',3600,96000,1002);
+INSERT INTO VEHICLE VALUES(2416,'RANGEROVER', 'SEDAN','Y_SERIES', 2018,'22-FEB-2020',4000,69000,1002);
+INSERT INTO VEHICLE VALUES(2417,'BMW', 'SEDAN','8_Series', 2016,'18-JAN-2018',4000,95000,1003);
+INSERT INTO VEHICLE VALUES(2418,'BMW','SEDAN','5_Series', 2012,'22-oct-2018',3200,65000,1001);
+INSERT INTO VEHICLE VALUES(2419,'BMW', 'HATCHBACK','X-zeries', 2010,'22-mar-2012',2500,66400,1001);
+INSERT INTO VEHICLE VALUES(2420,'BENZ', 'COUPE', 'X-zeries', 2016,'31-JAN-2018',2000,55000,1003);
+INSERT INTO VEHICLE VALUES(2421,'FORD', 'SUV', 'ENDEAVOUR', 2021,'28-MAY-2017',2500,74500,1001);
+INSERT INTO VEHICLE VALUES(2422,'TESLA','COUPE', 'ROADSTER', 2013,'14-FEB-2016',2600,60000,1001);
+INSERT INTO VEHICLE VALUES(2423,'HYUNDAI', 'SEDAN', 'ENDEAVOUR', 2018,'28-Feb-2019',2100,45000,1001);
+INSERT INTO VEHICLE VALUES(2424,'HYUNDAI', 'SEDAN', 'ROADSTER', 2014,'18-Feb-2015',1600,44000,1001);
+
+SELECT * FROM VEHICLE;
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Customer table creation
+CREATE TABLE CUSTOMERS(
+	CustomerID integer PRIMARY KEY,
+	FirstName varchar2(25) NOT NULL,
+	LastName varchar2(25) DEFAULT NULL,
+	Address varchar2(100) NOT NULL,
+	City varchar2(15) NOT NULL,
+	Phone number default NULL,
+	Email varchar2(25)  DEFAULT 'unknown@gmail.com' NULL,
+	Password varchar2(15) NOT NULL,
+	CONSTRAINT emailLogin_check  CHECK (LOWER (Email) LIKE '%@%')
+);
+
+DESC CUSTOMERS;
+
+
+INSERT INTO CUSTOMERS VALUES(1213,'Anil', 'Reddy', '11_new_RD_London_E136GP','London', 07359684255,'anil@gmail.com', 'Ani123d4@');
+INSERT INTO CUSTOMERS VALUES(1214,'Vishnu', 'Pancha', '99_pran_RD_Manchester_MR67SS','Manchester', 07896547153,'vish@gmail.com', 'Vis93@dh4');
+INSERT INTO CUSTOMERS VALUES(1215,'Ramya', 'Panchantram', '113_Humber_RD_London_E139NH','London', 07459635826,'ramya11@yahoo.com', 'Ram!ya3d4@');
+INSERT INTO CUSTOMERS VALUES(1216,'Ram', 'Murakonda', '13_Old_RD_London_E35JP','London', 07589614426,'ram07@gmail.com', 'Ram163d4@');
+INSERT INTO CUSTOMERS VALUES(1217,'Sandya', 'MURAKONDA', '13_Old_RD_London_E35JP','London', 0796587436,'san@gmail.com', 'Saa551d4@');
+INSERT INTO CUSTOMERS VALUES(1218,'Nitasha', 'MADIGE', '69_Starlin_RD_London_E35JP','London',07485926589,'nitash@yahoo.com', 'Nit99s34@');
+INSERT INTO CUSTOMERS VALUES(1219,'Shrawan', 'Pancha', '85_Brims_RD_Burmingham_BR67SS','Burmingham', 07852369741,'ss22df@gmail.com', 'Sra5588!');
+INSERT INTO CUSTOMERS VALUES(1220,'Naskethan', 'Banda', '53_easind_Burmingham_BR5JP','Burmingham', 07326575698,'banda8@gmail.com', 'Banda4@f');
+INSERT INTO CUSTOMERS VALUES(1221,'pooja', 'Hegde', '15_oyden_Rd_Croyden_CR5JP','Croyden',07359648548,'poja@gmail.com', 'gDsrj@f');
+INSERT INTO CUSTOMERS VALUES(1222,'Vinay', 'chill', '53_mani_RD_Manchester_MN56PP','Manchester',07582369874,'vinay@gmail.com', 'hgWnda8@');
+
+INSERT INTO CUSTOMERS(CustomerID,FirstName,LastName,Address,City,Phone,Password)
+                        VALUES(1223,'Balayya', 'Babu', '67__mani_RD_Manchester_MN41GY','Manchester', 07852341698,'Balyda8@');
+
+SELECT * FROM CUSTOMERS;
+
+------------------------------------------------------------------------------------------------------------------------------------------
+--Agent table creation
+CREATE TABLE AGENT (
+    AgentID INTEGER PRIMARY KEY,
+    AgentName VARCHAR2(25) NOT NULL,
+    Levels VARCHAR2(10) NULL,
+    HireDate date default NUll,
+    Phone varchar2(25) default NULL,
+    BranchID integer NULL,
+    Email varchar2(25) DEFAULT 'unknown@gmail.com',
+    Password varchar2(15) NOT NULL,
+    CONSTRAINT emailLogin_check1 CHECK (LOWER (Email) LIKE '%@%'),
+    CONSTRAINT branchID_fka FOREIGN KEY(BranchID) REFERENCES BRANCH(BranchID)
+);  
+    
+DESC AGENT;
+
+-- Agent table insertion
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1114,'Vishnu Vetri','11-May-2014',07448231489,1001,'vishnuvetri97@gmail.com', 'vishun@76');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1115,'Ragul Mani','01-Aug-2008',07338222489,1001,'ragul6458@gmail.com','Ragul78@dty');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1116,'Samikkannu Rajan','05-Sep-2014',07448457938,1001,'samikka253@yahoo.com', 'Sama3d4@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1117,'Kani Rajathi','10-Oct-2003',07448231555,1001,'kaniRaj@gmail.com', 'kanir3d4@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1118,'Maniraj kannan','01-Jan-2002',07448231444,1002,'maniRaja89@gmail.com', 'Maa551d4@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1119,'Radhika Samikkannu','06-May-2001',07448231457,1002,'radhika43@hotmail.com', 'Hony143s34@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1120,'Amma Valarmathi','01-Apr-2000',07448231456,1002,'ammaVal6@gmail.com', 'Ammi19788!');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1121,'Appa Samikkanuu','21-Dec-2016',07444567828,1003,'appaSami43@gmail.com', 'App246!@f');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1122,'Raj Ram','01-Aug-2002',07448224687,1003,'rajram35@gmail.com', 'vinay8@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1123,'Manisha Mathavan','25-Mar-2009',07448789563,1003,'manisha2010@gmail.com', 'manvit25@');
+INSERT INTO AGENT(AgentID, AgentName,HireDate,Phone,BranchID,Email,Password)
+                VALUES(1124,'ManitVanathi Selvam','01-Feb-2005',07448356878,1001,'mani2015@hotmail.com', 'Mvinay89@');
+INSERT INTO AGENT(AgentId,AgentName,HireDate,Phone,BranchID,Password)
+                    VALUES(1125,'Kannika kalai','01-Jan-2010',07448246785,1002,'manvit8@');
+
+SELECT * FROM AGENT;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Create DEPT table
+CREATE TABLE DEPT (
+    DeptID integer PRIMARY KEY,
+    Dname varchar2(35) NOT NULL,
+    Location varchar2(25) default NULL,
+    Phone number default NULL
+);
+
+DESC DEPT;
+
+-- Dept table insertion 
+INSERT INTO DEPT VALUES(10,'Accountant','London',0203400123);
+INSERT INTO DEPT VALUES(20,'IT','Manchester',0203400786);
+INSERT INTO DEPT VALUES(30,'Research','Birmingham',0203400786);
+INSERT INTO DEPT VALUES(40,'Sales','London',02034007568);
+INSERT INTO DEPT VALUES(50,'Operation','Birmingham',02032345789);
+
+SELECT * FROM DEPT;
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-- Employees table creation
+
+CREATE TABLE EMPLOYEES  (
+    EmpID integer PRIMARY KEY,
+    FirstName varchar2(25) NOT NULL,
+    LastName varchar2(25) default NULL,
+    Role varchar2(25) NOT NULL,
+    HireDate date default NULL,
+    Salary decimal(7,2) NULL,
+    Email varchar2(25) DEFAULT 'unknown@gmail.com',
+    BranchID integer NULL ,
+    DeptID integer NULL ,
+    CONSTRAINT emailLogin_check_emp  CHECK (LOWER (Email) LIKE '%@%')
+);
+
+
+ALTER TABLE EMPLOYEES ADD 
+    CONSTRAINT branch_fk FOREIGN KEY(BranchID) REFERENCES BRANCH(BranchID) ON DELETE SET NULL;
+ALTER TABLE EMPLOYEES ADD 
+    CONSTRAINT Deptid_fk FOREIGN KEY(DeptID) REFERENCES DEPT(DeptID) ON DELETE SET NULL;
+
+DESC EMPLOYEES;
+
+INSERT INTO EMPLOYEES VALUES(20809,'Vetrivel','Panchatcharam','Receptionist','01-jan-2006',1500,'vetri1976@gmail.com',1001,20); 
+INSERT INTO EMPLOYEES VALUES(20810,'Seshu','Ram','CTO','11-sep-2004',3500,'seshu123@gmail.com',1001,10);
+INSERT INTO EMPLOYEES VALUES(20811,'Sameer','Shaik','Manager','24-jan-2006',3800,'sameeer76@gmail.com',1001,10);
+INSERT INTO EMPLOYEES VALUES(20812,'Tharun','Munugoti','Receptionist','22-feb-2006',1350,'munugotir@gmail.com',1002,10);
+INSERT INTO EMPLOYEES VALUES(20825,'Huzaifa','Shaik','CTO','04-jan-2006',3200,'shaik123@gmail.com',1002,20);
+INSERT INTO EMPLOYEES VALUES(20826,'Shiny','kothapeta','Manager','31-jan-2006',3650,'kiran43@gmail.com',1002,20);
+INSERT INTO EMPLOYEES VALUES(20878,'Vamshi','Reddy','Receptionist','01-mar-2006',1200,'shiny143@gmail.com',1003,20);
+INSERT INTO EMPLOYEES VALUES(20879,'Kiran','kumar','CTO','27-jan-2008',3100,'kiran43@gmail.com',1003,30);
+INSERT INTO EMPLOYEES VALUES(20880,'Ravi','Varma','Manager','01-sep-2005',3000,'varmaravi@gmail.com',1003,30);
+INSERT INTO EMPLOYEES(EmpID,FirstName,LastName,Role,HireDate,Salary,BranchID,DeptID)
+                        VALUES(20813,'Manvitha','peram','CEO','17-nov-2007',NULL,1001,10);
+
+SELECT * FROM EMPLOYEES;
+--------------------------------------------------------------------------------------------------------------------------------
+-- Booking table creation
+CREATE TABLE BOOKING (
+    BookingID integer PRIMARY KEY,
+    BookingType Varchar2(10)NOT NULL,
+    BookingDate date NULL,
+    DateOut date NULL,
+    DateBack date NULL,
+    CustomerID integer NULL,
+    EmpID integer NULL,
+    VehicleId integer NULL,
+    AgentID integer NULL,
+    CONSTRAINT BDATE_FK CHECK(BookingDate > '17-OCT-2022'),
+    CONSTRAINT DODATE_FK CHECK(DateOut > '17-OCT-2022'),
+    CONSTRAINT DBDATE_FK CHECK(DateBack> '17-OCT-2022')
+);
+
+ALTER TABLE BOOKING
+    ADD CONSTRAINT BCustomerID_fk FOREIGN KEY(CustomerID)REFERENCES CUSTOMERS(CustomerID);
+ALTER TABLE BOOKING 
+    ADD CONSTRAINT BEmpid_fk FOREIGN KEY(EmpID) REFERENCES EMPLOYEES(EmpID);
+ALTER TABLE BOOKING
+    ADD CONSTRAINT BVehicleID_fka FOREIGN KEY(VehicleID) REFERENCES VEHICLE(VehicleID);
+ALTER TABLE BOOKING
+    ADD CONSTRAINT BAgentID_fka FOREIGN KEY(AgentID)REFERENCES AGENT(AgentID);
+
+DESC BOOKING;
+
+
+INSERT INTO BOOKING VALUES(1,'SALE','15-Nov-2022','25-Nov-2022',NULL,1215,20809,2401,1114);
+INSERT INTO BOOKING VALUES(2,'SALE','19-Nov-2022','21-Nov-2022',NULL,1216,20810,2410,1114);
+INSERT INTO BOOKING VALUES(3,'SALE','02-Dec-2022','05-Dec-2022',NULL,1217,20809,2402,1114);
+INSERT INTO BOOKING VALUES(4,'RENTAL','25-Oct-2022','12-Nov-2022','12-Dec-2022',1215,20810,2402,1114);
+INSERT INTO BOOKING VALUES(5,'RENTAL','28-Oct-2022','15-Nov-2022','10-Nov-2022',1216,20809,2401,1114);
+INSERT INTO BOOKING VALUES(6,'RENTAL','12-Nov-2022','25-Nov-2022','30-Nov-2022',1216,20809,2402,1115);
+INSERT INTO BOOKING VALUES(7,'SALE','25-Oct-2022','05-Nov-2022',NULL,1219,20809,2410,1119);
+INSERT INTO BOOKING VALUES(8,'SALE','23-Nov-2022','28-Nov-2022',NULL,1218,20879,2409,1120);
+INSERT INTO BOOKING VALUES(9,'RANTAL','01-Nov-2022','10-Nov-2022','24-Nov-2022',1215,20812,2401,1118);
+INSERT INTO BOOKING VALUES(10,'SALE','28-Oct-2022','01-Nov-2022',NULL,1215,20809,2408,1119);
+INSERT INTO BOOKING VALUES(11,'SALE','02-Dec-2022','02-Dec-2022',NULL,1213,20810,2405,1114);
+INSERT INTO BOOKING VALUES(12,'SALE','07-Nov-2022','12-Nov-2022',NULL,1214,20811,2405,1114);
+INSERT INTO BOOKING VALUES(13,'SALE','22-Oct-2022','17-Nov-2022',NULL,1223,20812,2406,1114);
+INSERT INTO BOOKING VALUES(14,'SALE','22-Nov-2022','25-Nov-2022',NULL,1221,20825,2407,1114);
+INSERT INTO BOOKING VALUES(15,'SALE','30-Nov-2022','30-Nov-2022',NULL,1213,20810,2405,1114);
+INSERT INTO BOOKING VALUES(16,'SALE','22-Oct-2022','25-Oct-2022',NULL,1214,20809,2408,1114);
+INSERT INTO BOOKING VALUES(17,'SALE','20-Nov-2022','25-Nov-2022',NULL,1216,20811,2409,1114);
+INSERT INTO BOOKING VALUES(18,'SALE','26-Nov-2022','26-Nov-2022',NULL,1217,20826,2410,1115);
+INSERT INTO BOOKING VALUES(19,'SALE','15-Nov-2022','15-Nov-2022',NULL,1218,20825,2411,1115);
+INSERT INTO BOOKING VALUES(20,'SALE','01-Dec-2022','01-Dec-2022',NULL,1219,20878,2412,1115);
+INSERT INTO BOOKING VALUES(21,'SALE','02-Dec-2022','03-Dec-2022',NULL,1219,20879,2413,1115);
+INSERT INTO BOOKING VALUES(22,'SALE','04-Dec-2022','06-Dec-2022',NULL,1216,20809,2414,1115);
+INSERT INTO BOOKING VALUES(23,'SALE','01-Dec-2022','02-Dec-2022',NULL,1218,20812,2415,1115);
+INSERT INTO BOOKING VALUES(24,'RENTAL','05-Dec-2022','05-Dec-2022','20-Dec-2022',1219,20812,2416,1119);
+INSERT INTO BOOKING VALUES(25,'RENTAL','25-Oct-2022','28-Oct-2022','25-Nov-2022',1220,20879,2420,1120);
+INSERT INTO BOOKING VALUES(26,'SALE','05-Nov-2022','25-Nov-2022',NULL,1215,20880,2419,1116);
+INSERT INTO BOOKING VALUES(27,'RENTAL','12-Nov-2022','15-Nov-2022',NULL,1221,20825,2407,1117);
+INSERT INTO BOOKING VALUES(28,'SALE','02-Nov-2022','26-OCT-2022',NULL,1221,20825,2423,1121);
+INSERT INTO BOOKING VALUES(29,'SALE','03-Nov-2022','26-OCT-2022',NULL,1221,20878,2402,1123);
+INSERT INTO BOOKING VALUES(30,'sale','26-oct-2022','28-Nov-2022',NULL,1222,20879,2421,1124);
+INSERT INTO BOOKING VALUES(31,'sale','21-oct-2022','28-Nov-2022',NULL,1223,20880,2402,1125);
+
+SELECT * FROM BOOKING;
+----------------------------------------------------------------------------------------------------------
+-- Payment table creation
+CREATE TABLE PAYMENT(
+	PaymentID varchar2(7) PRIMARY KEY,
+	PaymentDate date NULL,
+	Amount number NOT NULL,
+	AddCharge decimal default NULL,
+	BookingId integer default NULL
+);
+
+DESC PAYMENT;
+
+INSERT INTO PAYMENT VALUES('P101','25-Nov-2022',70000,1200,1);
+INSERT INTO PAYMENT VALUES('P102','21-Nov-2022',65000,5000,2);
+
+SELECT * FROM PAYMENT;
+
+----------------------------------------------------------------------------------------------------------------
+QUERIES:
+_______
+
+-- 1. Show current price of Sedan in all the Cities 
+
+SELECT * FROM BRANCH;
+
+SELECT * FROM VEHICLE;
+
+SELECT B.City,V.VehicleName,V.Model,V.VehicleType,V.RentalPrice ,V.SalePrice
+FROM BRANCH  B, VEHICLE  V
+WHERE VehicleType='SEDAN'
+AND B.BranchID = V.BranchID
+ORDER BY B.City;
+    
+
+
+-- 2. Show largest of price value from all models associated to London and Manchester 
+
+SELECT * FROM BRANCH;
+
+SELECT * FROM VEHICLE;
+
+CREATE VIEW PRICE_AllMODEL AS 
+SELECT VEHICLE.BranchID,SalePrice,RentalPrice, City, Model, VehicleName
+FROM VEHICLE, BRANCH
+WHERE VEHICLE.BranchID =BRANCH.BranchID;
+
+SELECT * FROM PRICE_AllMODEL;
+
+
+--Show largest of price value from all models associated to London and Manchester 
+SELECT Model, VehicleName,Max(SalePrice) "LARGEST SALE PRICE" ,Max(RentalPrice) AS "LARGEST RENTAL PRICE", City
+FROM PRICE_AllMODEL
+WHERE City IN('London','Manchester')
+GROUP BY Model,City, VehicleName
+ORDER BY City;
+
+--3. Show minimum price for London vehicles (from all models)
+
+SELECT Model,VehicleName,MIN(SalePrice) AS "MIN SALE PRICE ", MIN(RENTALPRICE) AS "MIN RENTAL PRICE",City
+FROM PRICE_AllMODEL
+WHERE City='London'
+GROUP BY Model, City,VehicleName;
+
+
+--4. Find Agent who has maximum number of timeslots 
+
+SELECT * FROM AGENT;
+
+SELECT * FROM BOOKING;
+
+CREATE VIEW AGENTVIEW AS 
+SELECT BOOKING.AGENTID, AGENT.AGENTNAME 
+FROM BOOKING 
+INNER JOIN AGENT 
+    ON BOOKING.AGENTID = AGENT.AGENTID;
+
+
+SELECT * FROM AGENTVIEW;
+
+-- This view we want to use number 8
+SELECT AGENTID, COUNT(AGENTID) AS "NUMBER OF BOOKING", AGENTNAME 
+FROM AGENTVIEW 
+GROUP BY AGENTID, AGENTNAME 
+ORDER BY "NUMBER OF BOOKING" DESC 
+FETCH FIRST 1 ROW ONLY;
+
+-- 5. Find customer which booked the maximum number of timeslots 
+SELECT * FROM BOOKING;
+
+SELECT * FROM CUSTOMERS;
+
+CREATE VIEW CUSTOMERVIEW AS 
+SELECT BOOKING.CustomerID, CUSTOMERS.FirstName,CUSTOMERS.LastName
+FROM BOOKING,CUSTOMERS 
+WHERE BOOKING.CustomerID = CUSTOMERS.CustomerID;
+
+SELECT * FROM CUSTOMERVIEW;
+
+--Find customer which booked the maximum number of timeslots  through customerview
+SELECT CustomerID,COUNT(CustomerID) AS "NUMBER OF BOOKING", FirstName, LastName
+FROM CUSTOMERVIEW
+GROUP BY CustomerID,FirstName, LastName
+ORDER BY "NUMBER OF BOOKING" DESC
+FETCH FIRST 1 ROW ONLY;
+
+--6. Show all models having price higher than average for model in Birmingham 
+SELECT * FROM VEHICLE;
+SELECT * FROM BRANCH;
+-- Create view for selecting match record
+CREATE VIEW VEHICLEPRICE AS
+SELECT City,SalePrice, Model, VehicleType
+FROM VEHICLE,BRANCH
+WHERE BRANCH.BranchID = VEHICLE.BranchID;
+
+SELECT * FROM VEHICLEPRICE;
+
+-- Find Average sales price in Birmingham
+CREATE VIEW AVGSALEPRICE AS
+ SELECT AVG(SALEPRICE) AS "AVERAGE SALPRICE IN BIRMINGHAM"
+  FROM VEHICLEPRICE
+  WHERE CITY = 'Birmingham'
+  GROUP BY Model
+  ORDER BY "AVERAGE SALPRICE IN BIRMINGHAM" DESC
+FETCH FIRST 1 ROW ONLY;
+
+SELECT * FROM AVGSALEPRICE;
+
+-- Find all model price higher then avg  price in Birmingham through avgsalprice 
+SELECT City,SALEPRICE, MODEL
+FROM VEHICLEPRICE
+WHERE SALEPRICE >
+( SELECT * FROM AVGSALEPRICE);
+
+ -- 7. Update the price for all models, for London and Manchester, for today, assuming they 
+--want to give offer of 80 GBP per vehicle 
+
+SELECT * FROM VEHICLE;
+
+SELECT * FROM BRANCH;
+
+CREATE VIEW AllVEHICLEMODEL AS
+SELECT City,RentalPrice, VehicleName,Model
+FROM VEHICLE,BRANCH
+WHERE BRANCH.BranchID = VEHICLE.BranchID;
+
+SELECT * FROM AllVEHICLEMODEL;
+
+-- Update the price with 80 pounds offer in AllVEHICLEMODEL view
+UPDATE AllVEHICLEMODEL
+SET RentalPrice = RentalPrice - 80
+WHERE City IN('London','Manchester');
+
+SELECT * FROM AllVEHICLEMODEL
+ORDER BY City;
+
+SELECT * FROM VEHICLE;
+
+--8. Show the maximum price sold from all Gold and Bronze Agents, for all models 
+SELECT * FROM VEHICLE;
+SELECT * FROM AGENT;
+SELECT * FROM BOOKING;
+
+CREATE VIEW AGENTID_MATCHVIEW AS 
+SELECT BOOKING.AGENTID,VehicleName,VehicleType, Model,SalePrice
+FROM BOOKING,VEHICLE
+WHERE BOOKING.VehicleID = VEHICLE.VehicleID;
+
+SELECT * FROM AGENTID_MATCHVIEW;
+
+CREATE VIEW HIGHESTPRICE_VIEW AS 
+SELECT AgentId,VehicleName,VehicleType,Model,Max(SalePrice) AS "MAX SOLD PRICE"
+FROM AGENTID_MATCHVIEW
+GROUP BY model,AgentId,VehicleType,VehicleName
+ORDER BY  "MAX SOLD PRICE" DESC ;
+
+
+SELECT * FROM HIGHESTPRICE_VIEW;
+
+
+CREATE VIEW UPDATELEVEL AS
+SELECT AGENTID, COUNT(AGENTID) AS "NUMBER OF BOOKING"
+FROM AGENTID_MATCHVIEW
+GROUP BY AGENTID 
+ORDER BY "NUMBER OF BOOKING" DESC;
+
+SELECT * FROM UPDATELEVEL;
+
+--Update levels through agentview1 view
+SELECT * FROM AGENT;
+CREATE VIEW AGENTVIEW1 AS 
+SELECT UPDATELEVEL.AGENTID, AGENT.AGENTNAME , levels, "NUMBER OF BOOKING"
+FROM UPDATELEVEL
+INNER JOIN AGENT 
+    ON UPDATELEVEL.AGENTID = AGENT.AGENTID;
+
+UPDATE AGENTVIEW1 SET LEVELS = 'GOLD'
+        WHERE "NUMBER OF BOOKING" >=10;
+        
+UPDATE AGENTVIEW1 SET LEVELS = 'SILVER'
+        WHERE "NUMBER OF BOOKING" <10 AND "NUMBER OF BOOKING" >4 ;
+        
+UPDATE AGENTVIEW1 SET LEVELS = 'BRONZE'
+        WHERE "NUMBER OF BOOKING" < 4;
+        
+SELECT * FROM AGENTVIEW1; 
+
+SELECT * FROM AGENT;
+-----------------------------------------------------------------------------------------------------------
+--Maximum price sold from all Gold and Bronze Agents, for all models 
+CREATE VIEW FINALAGENTVIEW AS
+SELECT VehicleName,VehicleType,Model,"MAX SOLD PRICE",AgentName, levels
+FROM HIGHESTPRICE_VIEW
+INNER JOIN AGENTVIEW1 
+    ON HIGHESTPRICE_VIEW.AGENTID = AGENTVIEW1.AGENTID
+ORDER BY Levels;
+
+SELECT * FROM FINALAGENTVIEW
+    WHERE LEVELS IN ('GOLD','BRONZE')
+
+
+--9. Trigger: Create a trigger which places the customers, which have been deleted into a 
+--customer table. This allows records to be maintained while improving query times for existing customers. 
+
+SELECT * FROM CUSTOMERS;
+
+CREATE TABLE DELETEDCUSTOMERS(
+    DC_ID Integer,
+	CustomerID integer PRIMARY KEY,
+	FirstName varchar2(25) NOT NULL,
+	LastName varchar2(25) NOT NULL,
+	Address varchar2(100) NOT NULL,
+	City varchar2(15) NOT NULL,
+	Phone number default NULL,
+	Email varchar2(25) DEFAULT 'unknown@gmail.com',
+	Password varchar2(15) NOT NULL,
+	CONSTRAINT demailLogin_check  CHECK (LOWER (Email) LIKE '%@%')
+);
+
+
+DESC DELETEDCUSTOMERS;
+
+CREATE SEQUENCE DC_SEQ;
+
+CREATE OR REPLACE TRIGGER DELETECUSTOMERS_TR
+AFTER DELETE ON CUSTOMERS
+FOR EACH ROW
+BEGIN
+    INSERT INTO DELETEDCUSTOMERS(DC_ID,CustomerID,FirstName,LastName,Address,City,Phone,Email,Password)
+    VALUES(DC_SEQ.nextval,:old.CustomerID,:old.FirstName,:old.LastName,:old.Address,:old.City,:old.Phone,:old.Email,:old.Password);
+END;
+
+SELECT * FROM CUSTOMERS;
+
+DROP TABLE BOOKING;
+
+DELETE FROM CUSTOMERS WHERE CustomerID = 1213;
